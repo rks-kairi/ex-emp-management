@@ -19,15 +19,12 @@ import jp.co.sample.domain.Employee;
  * @author hashimotokairi
  * 
  */
-
 @Repository
-
-
-/**
- * Employeeオブジェクトを生成するローマッパー.
- */
 public class EmployeeRepository {
 	
+	/**
+	 * Employeeオブジェクトを生成するローマッパー.
+	 */
 	private static final RowMapper<Employee> EMPLOYEE_ROW_MAPPER = (rs,i) -> {
 		Employee employee = new Employee();
 		employee.setId(rs.getInt("id"));
@@ -51,21 +48,21 @@ public class EmployeeRepository {
 	private NamedParameterJdbcTemplate template;
 	
 	/**
-	 * 全検索を行う
-	 * @return 従業員一覧
+	 * 全検索を行う.
+	 * 
+	 * @return 従業員一覧(従業員が存在しない場合0件の従業員一覧を返す)
 	 */
 	public List<Employee> findAll(){
 		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count"
 				+ " FROM employees ORDER BY hire_date DESC";
 		List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
-		if(employeeList.size() == 0) {
-			return employeeList;
-		}
+
 		return employeeList;
 	}
 	
 	/**
 	 * 主キー検索を行う.
+	 * 
 	 * @param id ID
 	 * @return 検索された従業員情報
 	 */
@@ -80,7 +77,8 @@ public class EmployeeRepository {
 		
 	}
 	/**
-	 * 渡した従業員情報を保存する
+	 * 渡した従業員情報を保存する.
+	 * 
 	 * @param employee 従業員情報
 	 */
 	public void update(Employee employee) {
