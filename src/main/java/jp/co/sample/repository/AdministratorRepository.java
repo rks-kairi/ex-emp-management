@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import jp.co.sample.domain.Administrator;
+
 /**
  * administratorテーブルを操作するリポジトリ.
  * 
@@ -18,10 +19,11 @@ import jp.co.sample.domain.Administrator;
  * 
  */
 @Repository
-/**
- * Administratorオブジェクトを生成するローマッパー.
- */
 public class AdministratorRepository {
+	
+	/**
+	 * Administratorオブジェクトを生成するローマッパー.
+	 */
 	private static final RowMapper<Administrator> ADMINISTRATOR_ROW_MAPPER = (rs,i) -> {
 		Administrator administrator = new Administrator();
 		administrator.setId(rs.getInt("id"));
@@ -37,14 +39,13 @@ public class AdministratorRepository {
 	
 	/**
 	 * 渡した管理者情報を保存
-	 * 
 	 * @param administrators 管理者情報
 	 */
 	public void insert(Administrator administrator) {
 		
 		SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
 		
-		String insertSql = "INSERT INTO administrator(name,mail_address,password)"
+		String insertSql = "INSERT INTO administrators(name,mail_address,password)"
 				+ " VALUES(:name,:mail_address,:password)";
 		template.update(insertSql, param);
 		
@@ -56,18 +57,18 @@ public class AdministratorRepository {
 	 * @param password Password
 	 * @return 検索された管理者情報
 	 */
-	public List<Administrator> findByMailAddressAndPassword(String mailAddress, String password){
+	public Administrator findByMailAddressAndPassword(String mailAddress, String password){
 		
-		SqlParameterSource param = new MapSqlParameterSource().addValue("mail_address",mailAddress ).addValue("password", password);
+		SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress",mailAddress ).addValue("password", password);
 				
-		String findBySql = "SELECT id,name,mail_address,password FROM administrator WHERE mail_address=:mail_address AND password=:password;";
+		String findBySql = "SELECT id,name,mail_address,password FROM administrators WHERE mail_address=:mailAddress AND password=:password;";
 		
 		List<Administrator> administratorList = template.query(findBySql, param, ADMINISTRATOR_ROW_MAPPER);
 		
 		if(administratorList.size() == 0) {
 			return null;
 		}
-		return administratorList;
+		return administratorList.get(0);
 	}
 	
 }
