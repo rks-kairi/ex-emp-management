@@ -18,13 +18,24 @@ import jp.co.sample.repository.AdministratorRepository;
 public class AdministratorService {
 	@Autowired
 	private AdministratorRepository addAdministratorRepository;
-	
+
 	/**
 	 * 管理者情報を挿入する.
 	 * 
-	 * @param administrator 
+	 * @param administrator 挿入する管理者情報
 	 */
 	public void insert(Administrator administrator) {
 		addAdministratorRepository.insert(administrator);
+	}
+
+	/**
+	 * ログイン処理をする
+	 * 
+	 * @param mailAddress メールアドレス
+	 * @param password    パスワード
+	 * @return 検索された管理者情報(1件も存在しなければnullを返す)
+	 */
+	public Administrator login(String mailAddress, String password) {
+		return addAdministratorRepository.findByMailAddressAndPassword(mailAddress, password);
 	}
 }

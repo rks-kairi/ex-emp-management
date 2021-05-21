@@ -1,16 +1,16 @@
 package jp.co.sample.form;
 
 /**
- * ログイン時に使用するフォーム
+ * ログイン時に使用するフォーム.
  * 
  * @author kairi.hashimoto
  *
  */
 public class LoginForm {
-	/** メールアドレス*/
+	/** メールアドレス */
 	private String mailAddress;
-	
-	/** パスワード*/
+
+	/** パスワード */
 	private String password;
 
 	public String getMailAddress() {
