@@ -87,10 +87,11 @@ public class AdministratorController {
 	public String toLogin() {
 		return "administrator/login";
 	}
+
 	@RequestMapping("/login")
 	public String login(LoginForm form, Model model) {
-		Administrator administrator = administratorService.login(form.getMailAddress(),form.getPassword());
-		if(administrator == null) {
+		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+		if (administrator == null) {
 			model.addAttribute("failure", "メールアドレスまたはパスワードが不正です。");
 			return "administrator/login";
 		} else {
