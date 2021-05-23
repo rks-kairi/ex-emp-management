@@ -41,7 +41,7 @@ public class AdministratorController {
 	}
 
 	/**
-	 * フォームオブジェクトをrequestスコープに格納、 このメソッドは@RequestMappingがついているメソッドよりも先に呼ばれます。
+	 * フォームオブジェクトをrequestスコープに格納、 このメソッドは@RequestMappingがついているメソッドよりも先に呼ばれます.
 	 * 
 	 * @return フォームオブジェクトがrequestスコープに格納される
 	 */
@@ -51,7 +51,7 @@ public class AdministratorController {
 	}
 
 	/**
-	 * 管理者登録画面へフォワード
+	 * 管理者登録画面へフォワード.
 	 * 
 	 * @return 管理者登録画面
 	 */
@@ -88,6 +88,13 @@ public class AdministratorController {
 		return "administrator/login";
 	}
 
+	/**
+	 * ログインを行う.
+	 * 
+	 * @param form  フォーム
+	 * @param model セッションスコープ
+	 * @return 従業員一覧画面
+	 */
 	@RequestMapping("/login")
 	public String login(LoginForm form, Model model) {
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
