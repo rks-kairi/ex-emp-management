@@ -25,7 +25,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@ModelAttribute
-	public UpdateEmployeeForm setUpdateEmployeeForm() {
+	public UpdateEmployeeForm setUpForm() {
 		return new UpdateEmployeeForm();
 	}
 
@@ -55,5 +55,21 @@ public class EmployeeController {
 		Employee employee = employeeService.showDetail(getIntId);
 		model.addAttribute("employee", employee);
 		return "employee/detail";
+	}
+	
+	/**
+	 * 従業員情報を更新する.
+	 * 
+	 * @param form フォーム
+	 * @return 従業員一覧画面(リダイレクト)
+	 */
+	@RequestMapping("/update")
+	public String update(UpdateEmployeeForm form) {
+		int getIntId = Integer.parseInt(form.getId());
+		Employee employee = employeeService.showDetail(getIntId);
+		Integer getIntCount = Integer.parseInt(form.getDependentsCount());
+		employee.setDependentsCount(getIntCount);
+		employeeService.update(employee);
+		return "redirect:/employee/showList";
 	}
 }

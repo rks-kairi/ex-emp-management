@@ -101,10 +101,9 @@ public class AdministratorController {
 		if (administrator == null) {
 			model.addAttribute("failure", "メールアドレスまたはパスワードが不正です。");
 			return "administrator/login";
-		} else {
-			session.setAttribute("administratorName", administrator.getName());
-			return "forward:/employee/showList";
 		}
+		session.setAttribute("administratorName", administrator.getName());
+		return "forward:/employee/showList";
 	}
 
 }

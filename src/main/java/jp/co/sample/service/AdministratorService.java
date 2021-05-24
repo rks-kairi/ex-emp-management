@@ -29,7 +29,7 @@ public class AdministratorService {
 	}
 
 	/**
-	 * ログイン処理をする
+	 * ログイン処理をする.
 	 * 
 	 * @param mailAddress メールアドレス
 	 * @param password    パスワード
